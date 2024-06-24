@@ -12,7 +12,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @param {object} event        The event
          * @param {string} encodedValue The encoded value
          */
-        async handleActionClick (event, encodedValue) {
+        async handleActionClick(event, encodedValue) {
             const [actionTypeId, actionId] = encodedValue.split('|')
 
             const renderable = ['item']
@@ -46,7 +46,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @param {object} event        The event
          * @param {string} encodedValue The encoded value
          */
-        async handleActionHover (event, encodedValue) {}
+        async handleActionHover(event, encodedValue) { }
 
         /**
          * Handle group click
@@ -55,7 +55,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @param {object} event The event
          * @param {object} group The group
          */
-        async handleGroupClick (event, group) {}
+        async handleGroupClick(event, group) { }
 
         /**
          * Handle action
@@ -66,14 +66,14 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @param {string} actionTypeId The action type id
          * @param {string} actionId     The actionId
          */
-        async #handleAction (event, actor, token, actionTypeId, actionId) {
+        async #handleAction(event, actor, token, actionTypeId, actionId) {
             switch (actionTypeId) {
-            case 'item':
-                this.#handleItemAction(event, actor, actionId)
-                break
-            case 'utility':
-                this.#handleUtilityAction(token, actionId)
-                break
+                case 'item':
+                    this.#handleItemAction(event, actor, actionId)
+                    break
+                case 'utility':
+                    this.#handleUtilityAction(token, actionId)
+                    break
             }
         }
 
@@ -84,7 +84,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @param {object} actor    The actor
          * @param {string} actionId The action id
          */
-        #handleItemAction (event, actor, actionId) {
+        #handleItemAction(event, actor, actionId) {
             const item = actor.items.get(actionId)
             item.toChat(event)
         }
@@ -95,13 +95,13 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @param {object} token    The token
          * @param {string} actionId The action id
          */
-        async #handleUtilityAction (token, actionId) {
+        async #handleUtilityAction(token, actionId) {
             switch (actionId) {
-            case 'endTurn':
-                if (game.combat?.current?.tokenId === token.id) {
-                    await game.combat?.nextTurn()
-                }
-                break
+                case 'endTurn':
+                    if (game.combat?.current?.tokenId === token.id) {
+                        await game.combat?.nextTurn()
+                    }
+                    break
             }
         }
     }

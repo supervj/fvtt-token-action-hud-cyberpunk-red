@@ -26,6 +26,13 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
                     { ...groups.containers, nestId: 'inventory_containers' },
                     { ...groups.treasure, nestId: 'inventory_treasure' }
                 ]
+            }, {
+                nestId: 'skills',
+                id: 'skills',
+                name: coreModule.api.Utils.i18n('Skills'),
+                groups: [
+                    { ...groups.skills, nestId: 'skills_skills' }
+                ]
             },
             {
                 nestId: 'utility',

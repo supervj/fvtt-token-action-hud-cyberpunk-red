@@ -1,6 +1,6 @@
 {
-  "id": "token-action-hud-template",
-  "title": "Token Action HUD Template",
+  "id": "token-action-hud-cyberpunk-red",
+  "title": "Token Action HUD Cyberpunk Red",
   "description": "Token Action HUD is a repositionable HUD of actions for a selected token",
   "authors": [
     {
@@ -18,8 +18,7 @@
   "esmodules": [
     "./scripts/init.js"
   ],
-  "scripts": [
-  ],
+  "scripts": [],
   "styles": [
     "./styles/tah-template-style.css"
   ],
@@ -34,12 +33,12 @@
   "relationships": {
     "systems": [
       {
-        "id": "template",
+        "id": "cyberpunk-red-core",
         "type": "system",
         "compatibility": [
           {
-            "minimum": "1.0.0",
-            "verified": "1.0.0"
+            "minimum": "v0.88.2",
+            "verified": "v0.88.2"
           }
         ]
       }

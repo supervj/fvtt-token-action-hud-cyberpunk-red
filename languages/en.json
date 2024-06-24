@@ -1,6 +1,6 @@
 {
   "tokenActionHud": {
-    "template": {
+    "cpred": {
       "armor": "Armor",
       "containers": "Containers",
       "consumables": "Consumables",

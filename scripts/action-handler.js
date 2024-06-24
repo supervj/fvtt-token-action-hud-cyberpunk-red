@@ -1,5 +1,5 @@
 // System Module Imports
-import { ACTION_TYPE, ITEM_TYPE } from './constants.js'
+import { ACTION_TYPE, CARRY_TYPE_ICON, ITEM_TYPE } from './constants.js'
 import { Utils } from './utils.js'
 
 export let ActionHandler = null
@@ -15,7 +15,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @override
          * @param {array} groupIds
          */a
-        async buildSystemActions (groupIds) {
+        async buildSystemActions(groupIds) {
             // Set actor and token variables
             this.actors = (!this.actor) ? this._getActors() : [this.actor]
             this.actorType = this.actor?.type
@@ -41,7 +41,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * Build character actions
          * @private
          */
-        #buildCharacterActions () {
+        #buildCharacterActions() {
             this.#buildInventory()
         }
 
@@ -50,14 +50,15 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @private
          * @returns {object}
          */
-        #buildMultipleTokenActions () {
+        #buildMultipleTokenActions() {
         }
 
         /**
          * Build inventory
          * @private
          */
-        async #buildInventory () {
+        async #buildInventory() {
+            // Exit if no items exist
             if (this.items.size === 0) return
 
             const actionTypeId = 'item'

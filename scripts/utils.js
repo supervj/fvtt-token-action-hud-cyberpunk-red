@@ -8,12 +8,12 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
      */
     Utils = class Utils {
         /**
-         * Get setting
+         * Get setting value
          * @param {string} key               The key
          * @param {string=null} defaultValue The default value
          * @returns {string}                 The setting value
          */
-        static getSetting (key, defaultValue = null) {
+        static getSetting(key, defaultValue = null) {
             let value = defaultValue ?? null
             try {
                 value = game.settings.get(MODULE.ID, key)
@@ -24,11 +24,11 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
         }
 
         /**
-         * Set setting
+         * Set setting value
          * @param {string} key   The key
          * @param {string} value The value
          */
-        static async setSetting (key, value) {
+        static async setSetting(key, value) {
             try {
                 value = await game.settings.set(MODULE.ID, key, value)
                 coreModule.api.Logger.debug(`Setting '${key}' set to '${value}'`)
