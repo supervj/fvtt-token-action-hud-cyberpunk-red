@@ -85,8 +85,15 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @param {string} actionId The action id
          */
         #handleItemAction(event, actor, actionId) {
-            const item = actor.items.get(actionId)
-            item.toChat(event)
+            const item = actor.items.get(actionId);
+            if (item.type === "weapon") {
+                const fireMode = getProperty(actor, `flags.${game.system.id}.firetype-${actionId}`);
+                if (['aimed', 'autofire', 'suppresive'].includes(fireMode)) {
+                    game.cpr.macro.rollItemMacro(item.name, { rollType: fireMode });
+                } else game.cpr.macro.rollItemMacro(item.name, { rollType: 'attack' });
+            } else game.cpr.macro.rollItemMacro(item.name);
+
+
         }
 
         /**
