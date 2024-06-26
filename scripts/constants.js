@@ -54,30 +54,64 @@ export const CARRY_TYPE_ICON = {
  * Item types
  */
 export const ITEM_TYPE = {
+    ammo: { groupId: 'ammo' },
     armor: { groupId: 'armor' },
-    consumable: { groupId: 'consumables' },
-    equipment: { groupId: 'equipment' },
-    treasure: { groupId: 'treasure' },
+    clothing: { groupId: 'clothing' },
+    cyberdeck: { groupId: 'cyberdecks' },
+    cyberware: { groupId: 'cyberware' },
+    drug: { groupId: 'drugs' },
+    gear: { groupId: 'gear' },
+    itemUpgrade: { groupId: 'upgrades' },
+    program: { groupId: 'programs' },
+    vehicle: { groupId: 'vehicles' },
     weapon: { groupId: 'weapons' }
 }
+
+/**
+ * Skill types
+ */
+export const SKILL_TYPE = {
+    awarenessSkills: { groupId: 'awareness-skills' },
+    bodySkills: { groupId: 'body-skills' },
+    controlSkills: { groupId: 'control-skills' },
+    educationSkills: { groupId: 'education-skills' },
+    fightingSkills: { groupId: 'fighting-skills' },
+    performanceSkills: { groupId: 'performance-skills' },
+    rangedWeaponSkills: { groupId: 'ranged-weapon-skills' },
+    socialSkills: { groupId: 'social-skills' },
+    techniqueSkills: { groupId: 'technique-skills' }
+}
+
 
 /**
  * Groups
  */
 export const GROUP = {
-    attack: { id: 'attack', name: 'Attacks', type: 'system' },
-    toggles: { id: 'toggles', name: 'Toggles', type: 'system' },
-    strikes: { id: 'strikes', name: 'Strikes', type: 'system' },
-    actions: { id: 'actions', name: 'Actions', type: 'system' },
+    ammo: { id: 'ammo', name: 'Ammo', type: 'system' },
     armor: { id: 'armor', name: 'Armor', type: 'system' },
-    equipment: { id: 'equipment', name: 'Equipment', type: 'system' },
-    consumables: { id: 'consumables', name: 'Consumables', type: 'system' },
-    treasure: { id: 'treasure', name: 'Treasure', type: 'system' },
-    roleAbility: { id: 'roleAbility', name: 'Role Abilities', type: 'system' },
-    skills: { id: 'skills', name: 'Skills', type: 'system' },
-    weapons: { id: 'weapons', name: 'Weapons', type: 'system' },
-    combat: { id: 'combat', name: 'Combat', type: 'system' },
-    token: { id: 'token', name: 'Token', type: 'system' },
-    utility: { id: 'utility', name: 'tokenActionHud.utility', type: 'system' }
+    awarenessSkills: { id: 'awareness-skills', name: 'Awareness Skills', type: 'system' },
+    bodySkills: { id: 'body-skills', name: 'Body Skills', type: 'system' },
+    clothing: { id: 'clothing', name: 'Clothing', type: 'system' },
+    conditions: { id: 'conditions', name: 'Conditions', type: 'system' },
+    controlSkills: { id: 'control-skills', name: 'Control Skills', type: 'system' },
+    cyberware: { id: 'cyberware', name: 'Cyberware', type: 'system' },
+    cyberdecks: { id: 'cyberdecks', name: 'Cyberdecks', type: 'system' },
+    drugs: { id: 'drugs', name: 'Drugs', type: 'system' },
+    educationSkills: { id: 'education-skills', name: 'Education Skills', type: 'system' },
+    fightingSkills: { id: 'fighting-skills', name: 'Fighting Skills', type: 'system' },
+    gear: { id: 'gear', name: 'Gear', type: 'system' },
+    passiveEffects: { id: 'passive-effects', name: 'Passive Effects', type: 'system' },
+    performanceSkills: { id: 'performance-skills', name: 'Performance Skills', type: 'system' },
+    programs: { id: 'programs', name: 'Programs', type: 'system' },
+    rangedWeaponSkills: { id: 'ranged-weapon-skills', name: 'Ranged Weapon Skills', type: 'system' },
+    roles: { id: 'roles', name: 'Roles', type: 'system' },
+    socialSkills: { id: 'social-skills', name: 'Social Skills', type: 'system' },
+    stats: { id: 'stats', name: 'Stats', type: 'system' },
+    techniqueSkills: { id: 'technique-skills', name: 'Technique Skills', type: 'system' },
+    temporaryEffects: { id: 'temporary-effects', name: 'Temporary Effects', type: 'system' },
+    upgrades: { id: 'upgrades', name: 'Upgrades', type: 'system' },
+    utility: { id: 'utility', name: 'tokenActionHud.utility', type: 'system' },
+    vehicles: { id: 'vehicles', name: 'Vehicles', type: 'system' },
+    weapons: { id: 'weapons', name: 'Weapons', type: 'system' }
 }
 

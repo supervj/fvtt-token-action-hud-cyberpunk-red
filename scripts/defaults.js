@@ -15,23 +15,63 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
     DEFAULTS = {
         layout: [
             {
-                nestId: 'inventory',
-                id: 'inventory',
-                name: coreModule.api.Utils.i18n('Template.Inventory'),
+                nestId: 'gear',
+                id: 'gear',
+                name: coreModule.api.Utils.i18n('Gear'),
                 groups: [
-                    { ...groups.weapons, nestId: 'inventory_weapons' },
-                    { ...groups.armor, nestId: 'inventory_armor' },
-                    { ...groups.equipment, nestId: 'inventory_equipment' },
-                    { ...groups.consumables, nestId: 'inventory_consumables' },
-                    { ...groups.containers, nestId: 'inventory_containers' },
-                    { ...groups.treasure, nestId: 'inventory_treasure' }
+                    { ...groups.weapons, nestId: 'gear_weapons' },
+                    { ...groups.ammo, nestId: 'gear_ammo' },
+                    { ...groups.armor, nestId: 'gear_armor' },
+                    { ...groups.cyberware, nestId: 'gear_cyberware' },
+                    { ...groups.drugs, nestId: 'gear_drugs' },
+                    { ...groups.gear, nestId: 'gear_gear' },
+                    { ...groups.clothing, nestId: 'gear_clothing' },
+                    { ...groups.vehicles, nestId: 'gear_vehicles' },
+                    { ...groups.cyberdecks, nestId: 'gear_cyberdecks' },
+                    { ...groups.programs, nestId: 'gear_programs' },
+                    { ...groups.upgrades, nestId: 'gear_upgrades' }
                 ]
-            }, {
+            },
+            {
+                nestId: 'stats',
+                id: 'stats',
+                name: coreModule.api.Utils.i18n('Stats'),
+                groups: [
+                    { ...groups.stats, nestId: 'stats_stats' }
+                ]
+            },
+            {
+                nestId: 'roles',
+                id: 'roles',
+                name: coreModule.api.Utils.i18n('Roles'),
+                groups: [
+                    { ...groups.roles, nestId: 'roles_roles' }
+                ]
+            },
+            {
                 nestId: 'skills',
                 id: 'skills',
                 name: coreModule.api.Utils.i18n('Skills'),
                 groups: [
-                    { ...groups.skills, nestId: 'skills_skills' }
+                    { ...groups.awarenessSkills, nestId: 'skills_awareness-skills' },
+                    { ...groups.bodySkills, nestId: 'skills_body-skills' },
+                    { ...groups.controlSkills, nestId: 'skills_control-skills' },
+                    { ...groups.educationSkills, nestId: 'skills_education-skills' },
+                    { ...groups.fightingSkills, nestId: 'skills_fighting-skills' },
+                    { ...groups.performanceSkills, nestId: 'skills_performance-skills' },
+                    { ...groups.rangedWeaponSkills, nestId: 'skills_ranged-weapon-skills' },
+                    { ...groups.socialSkills, nestId: 'skills_social-skills' },
+                    { ...groups.techniqueSkills, nestId: 'skills_technique-skills' }
+                ]
+            },
+            {
+                nestId: 'effects',
+                id: 'effects',
+                name: coreModule.api.Utils.i18n('DND5E.Effects'),
+                groups: [
+                    { ...groups.temporaryEffects, nestId: 'effects_temporary-effects' },
+                    { ...groups.passiveEffects, nestId: 'effects_passive-effects' },
+                    { ...groups.conditions, nestId: 'effects_conditions' }
                 ]
             },
             {

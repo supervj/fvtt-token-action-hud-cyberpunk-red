@@ -30,7 +30,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
                 this.items = items
             }
 
-            if (this.actorType === 'character') {
+            if (['character', 'mook'].includes(this.actorType)) {
                 this.#buildCharacterActions()
             } else if (!this.actor) {
                 this.#buildMultipleTokenActions()
