@@ -22,11 +22,10 @@ export const REQUIRED_CORE_MODULE_VERSION = '1.5'
  */
 export const ACTION_TYPE = {
     action: 'CPR.global.generic.actions',
-    attribute: 'Attributes',
+    stat: 'Stats',
     initiative: 'Initiative',
     item: 'Item',
     skill: 'Skill',
-    skillAction: 'Skill Action',
     strike: 'Strike',
     strikeAuxiliaryAction: 'Strike Aux Action',
     toggle: 'Toggle',
@@ -71,15 +70,15 @@ export const ITEM_TYPE = {
  * Skill types
  */
 export const SKILL_TYPE = {
-    awarenessSkills: { groupId: 'awareness-skills' },
-    bodySkills: { groupId: 'body-skills' },
-    controlSkills: { groupId: 'control-skills' },
-    educationSkills: { groupId: 'education-skills' },
-    fightingSkills: { groupId: 'fighting-skills' },
-    performanceSkills: { groupId: 'performance-skills' },
-    rangedWeaponSkills: { groupId: 'ranged-weapon-skills' },
-    socialSkills: { groupId: 'social-skills' },
-    techniqueSkills: { groupId: 'technique-skills' }
+    awarenessSkills: { groupId: 'awarenessSkills' },
+    bodySkills: { groupId: 'bodySkills' },
+    controlSkills: { groupId: 'controlSkills' },
+    educationSkills: { groupId: 'educationSkills' },
+    fightingSkills: { groupId: 'fightingSkills' },
+    performanceSkills: { groupId: 'performanceSkills' },
+    rangedweaponSkills: { groupId: 'rangedWeaponSkills' },
+    socialSkills: { groupId: 'socialSkills' },
+    techniqueSkills: { groupId: 'techniqueSkills' }
 }
 
 

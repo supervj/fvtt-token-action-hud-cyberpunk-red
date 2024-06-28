@@ -14,7 +14,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * Called by Token Action HUD Core
          * @override
          * @param {array} groupIds
-         */a
+         */
         async buildSystemActions(groupIds) {
             // Set actor and token variables
             this.actors = (!this.actor) ? this._getActors() : [this.actor]
@@ -101,6 +101,101 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
                 // TAH Core method to add actions to the action list
                 this.addActions(actions, groupData)
             }
+        }
+
+        /**
+         * Build skills
+         * @private
+         */
+        async #buildskills() {
+            // Exit if no items exist
+            if (this.items.size === 0) return
+
+            const actionTypeId = 'skill'
+            const skillMap = new Map()
+
+            for (const [itemId, itemData] of this.items) {
+                const type = itemData.type
+
+                if (type === 'skill') {
+                    const category = itemData.system.category
+                    const categoryMap = skillMap.get(category) ?? new Map()
+                    categoryMap.set(itemId, itemData)
+                    skillMap.set(type, categoryMap)
+                }
+            }
+
+            for (const [category, categoryMap] of skillMap) {
+                const groupId = SKILL_TYPE[category]?.groupId
+
+                if (!groupId) continue
+
+                const groupData = { id: groupId, type: 'system' }
+
+                // Get actions
+                const actions = [...categoryMap].map(([itemId, itemData]) => {
+                    const id = itemId
+                    const name = itemData.name
+                    const actionTypeName = coreModule.api.Utils.i18n(ACTION_TYPE[actionTypeId])
+                    const listName = `${actionTypeName ? `${actionTypeName}: ` : ''}${name}`
+                    const encodedValue = [actionTypeId, id].join(this.delimiter)
+
+                    return {
+                        id,
+                        name,
+                        listName,
+                        encodedValue
+                    }
+                })
+
+                // TAH Core method to add actions to the action list
+                this.addActions(actions, groupData)
+            }
+        }
+
+        /**
+         * Build stats
+         * @private
+         */
+        async #buildstats() {
+
+            const stats = this.actor.system.stats
+
+            // Exit if no stats exist
+            if (stats.length === 0) return
+
+            // Get actions
+            const actions = Object.entries(stats)
+                .filter((stat) => stats[stat[0]].value !== 0)
+                .map(([statId, stat]) => {
+                    const id = `${actionType}-${statId}`
+                    const abbreviatedName = abilityId.charAt(0).toUpperCase() + abilityId.slice(1)
+                    const label = this.systemVersion >= '2.2' ? CONFIG.DND5E.stats[abilityId].label : CONFIG.DND5E.stats[abilityId]
+                    const name = this.abbreviateSkills ? abbreviatedName : label
+                    // Localise
+                    const actionTypeName = `${coreModule.api.Utils.i18n(ACTION_TYPE[actionType])}: ` ?? ''
+                    const listName = `${actionTypeName}${label}`
+                    const encodedValue = [actionType, abilityId].join(this.delimiter)
+                    const icon1 = (groupId !== 'checks') ? this.#getProficiencyIcon(stats[abilityId].proficient) : ''
+                    const mod = (groupId !== 'saves') ? ability?.mod : ((groupId === 'saves') ? ability?.save : '')
+                    const info1 = (this.actor) ? { text: coreModule.api.Utils.getModifier(mod) } : null
+                    const info2 = (this.actor && groupId === 'stats') ? { text: `(${coreModule.api.Utils.getModifier(ability?.save)})` } : null
+                    return {
+                        id,
+                        name,
+                        encodedValue,
+                        icon1,
+                        info1,
+                        info2,
+                        listName
+                    }
+                })
+
+            // Create group data
+            const groupData = { id: groupId, type: 'system' }
+
+            // Add actions to action list
+            this.addActions(actions, groupData)
         }
     }
 })
