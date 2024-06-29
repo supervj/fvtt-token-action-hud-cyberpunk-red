@@ -52,7 +52,7 @@ export const CARRY_TYPE_ICON = {
 /**
  * Item types
  */
-export const ITEM_TYPE = {
+export const GEAR_TYPE = {
     ammo: { groupId: 'ammo' },
     armor: { groupId: 'armor' },
     clothing: { groupId: 'clothing' },
@@ -70,17 +70,32 @@ export const ITEM_TYPE = {
  * Skill types
  */
 export const SKILL_TYPE = {
-    awarenessSkills: { groupId: 'awarenessSkills' },
-    bodySkills: { groupId: 'bodySkills' },
-    controlSkills: { groupId: 'controlSkills' },
-    educationSkills: { groupId: 'educationSkills' },
-    fightingSkills: { groupId: 'fightingSkills' },
-    performanceSkills: { groupId: 'performanceSkills' },
-    rangedweaponSkills: { groupId: 'rangedWeaponSkills' },
-    socialSkills: { groupId: 'socialSkills' },
-    techniqueSkills: { groupId: 'techniqueSkills' }
+    awarenessSkills: { groupId: 'awareness-skills' },
+    bodySkills: { groupId: 'body-skills' },
+    controlSkills: { groupId: 'control-skills' },
+    educationSkills: { groupId: 'education-skills' },
+    fightingSkills: { groupId: 'fighting-skills' },
+    performanceSkills: { groupId: 'performance-skills' },
+    rangedweaponSkills: { groupId: 'ranged-weapon-skills' },
+    socialSkills: { groupId: 'social-skills' },
+    techniqueSkills: { groupId: 'technique-skills' }
 }
 
+/**
+ * Stat types
+ */
+export const STAT_TYPE = {
+    body: { groupId: 'physical-stats', name: 'Body' },
+    cool: { groupId: 'mental-stats', name: 'Cool' },
+    dex: { groupId: 'physical-stats', name: 'Dexterity' },
+    emp: { groupId: 'mental-stats', name: 'Empathy' },
+    int: { groupId: 'mental-stats', name: 'Intelligence' },
+    luck: { groupId: 'fortune-stats', name: 'Luck' },
+    move: { groupId: 'physical-stats', name: 'Movement' },
+    ref: { groupId: 'combat-stats', name: 'Reflexes' },
+    tech: { groupId: 'combat-stats', name: 'Technique' },
+    will: { groupId: 'mental-stats', name: 'Willpower' },
+}
 
 /**
  * Groups
@@ -91,16 +106,20 @@ export const GROUP = {
     awarenessSkills: { id: 'awareness-skills', name: 'Awareness Skills', type: 'system' },
     bodySkills: { id: 'body-skills', name: 'Body Skills', type: 'system' },
     clothing: { id: 'clothing', name: 'Clothing', type: 'system' },
+    combatStats: { id: 'combat-stats', name: 'Combat Stats', type: 'system' },
     conditions: { id: 'conditions', name: 'Conditions', type: 'system' },
     controlSkills: { id: 'control-skills', name: 'Control Skills', type: 'system' },
-    cyberware: { id: 'cyberware', name: 'Cyberware', type: 'system' },
     cyberdecks: { id: 'cyberdecks', name: 'Cyberdecks', type: 'system' },
+    cyberware: { id: 'cyberware', name: 'Cyberware', type: 'system' },
     drugs: { id: 'drugs', name: 'Drugs', type: 'system' },
     educationSkills: { id: 'education-skills', name: 'Education Skills', type: 'system' },
     fightingSkills: { id: 'fighting-skills', name: 'Fighting Skills', type: 'system' },
+    fortuneStats: { id: 'fortune-stats', name: 'Fortune Stats', type: 'system' },
     gear: { id: 'gear', name: 'Gear', type: 'system' },
+    mentalStats: { id: 'mental-stats', name: 'Mental Stats', type: 'system' },
     passiveEffects: { id: 'passive-effects', name: 'Passive Effects', type: 'system' },
     performanceSkills: { id: 'performance-skills', name: 'Performance Skills', type: 'system' },
+    physicalStats: { id: 'physical-stats', name: 'Physical Stats', type: 'system' },
     programs: { id: 'programs', name: 'Programs', type: 'system' },
     rangedWeaponSkills: { id: 'ranged-weapon-skills', name: 'Ranged Weapon Skills', type: 'system' },
     roles: { id: 'roles', name: 'Roles', type: 'system' },

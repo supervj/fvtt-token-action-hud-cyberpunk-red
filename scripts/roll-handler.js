@@ -21,7 +21,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
                 return this.doRenderItem(this.actor, actionId)
             }
 
-            const knownCharacters = ['character']
+            const knownCharacters = ['character', 'mook']
 
             // If single actor is selected
             if (this.actor) {
@@ -71,6 +71,12 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
                 case 'item':
                     this.#handleItemAction(event, actor, actionId)
                     break
+                case 'stat':
+                    this.#handleStatAction(event, actor, actionId)
+                    break
+                case 'skill':
+                    this.#handleSkillAction(event, actor, actionId)
+                    break
                 case 'utility':
                     this.#handleUtilityAction(token, actionId)
                     break
@@ -93,6 +99,28 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
                 } else game.cpr.macro.rollItemMacro(item.name, { rollType: 'attack' });
             } else game.cpr.macro.rollItemMacro(item.name);
 
+        }
+        /**
+         * Handle stat action
+         * @private
+         * @param {object} event    The event
+         * @param {object} actor    The actor
+         * @param {string} actionId The action id
+         */
+        #handleStatAction(event, actor, actionId) {
+            game.cpr.macro.rollItemMacro(actionId);
+        }
+
+        /**
+         * Handle Skill action
+         * @private
+         * @param {object} event    The event
+         * @param {object} actor    The actor
+         * @param {string} actionId The action id
+         */
+        #handleSkillAction(event, actor, actionId) {
+            const skill = actor.items.get(actionId);
+            game.cpr.macro.rollItemMacro(skill.name);
 
         }
 

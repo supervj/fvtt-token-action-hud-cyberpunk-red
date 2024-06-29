@@ -37,7 +37,10 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
                 id: 'stats',
                 name: coreModule.api.Utils.i18n('Stats'),
                 groups: [
-                    { ...groups.stats, nestId: 'stats_stats' }
+                    { ...groups.mentalStats, nestId: 'stats_mental-stats' },
+                    { ...groups.combatStats, nestId: 'stats_combat-stats' },
+                    { ...groups.fortuneStats, nestId: 'stats_fortune-stats' },
+                    { ...groups.physicalStats, nestId: 'stats_physical-stats' }
                 ]
             },
             {

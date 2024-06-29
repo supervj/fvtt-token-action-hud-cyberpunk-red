@@ -1,5 +1,5 @@
 // System Module Imports
-import { ACTION_TYPE, CARRY_TYPE_ICON, ITEM_TYPE } from './constants.js'
+import { ACTION_TYPE, CARRY_TYPE_ICON, GEAR_TYPE, SKILL_TYPE, STAT_TYPE } from './constants.js'
 import { Utils } from './utils.js'
 
 export let ActionHandler = null
@@ -42,7 +42,9 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * @private
          */
         #buildCharacterActions() {
-            this.#buildInventory()
+            this.#buildGear()
+            this.#buildSkills()
+            this.#buildStats()
         }
 
         /**
@@ -54,29 +56,29 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
         }
 
         /**
-         * Build inventory
+         * Build gear
          * @private
          */
-        async #buildInventory() {
+        async #buildGear() {
             // Exit if no items exist
             if (this.items.size === 0) return
 
             const actionTypeId = 'item'
-            const inventoryMap = new Map()
+            const gearMap = new Map()
 
             for (const [itemId, itemData] of this.items) {
                 const type = itemData.type
                 const equipped = itemData.equipped
 
                 if (equipped || this.displayUnequipped) {
-                    const typeMap = inventoryMap.get(type) ?? new Map()
+                    const typeMap = gearMap.get(type) ?? new Map()
                     typeMap.set(itemId, itemData)
-                    inventoryMap.set(type, typeMap)
+                    gearMap.set(type, typeMap)
                 }
             }
 
-            for (const [type, typeMap] of inventoryMap) {
-                const groupId = ITEM_TYPE[type]?.groupId
+            for (const [type, typeMap] of gearMap) {
+                const groupId = GEAR_TYPE[type]?.groupId
 
                 if (!groupId) continue
 
@@ -107,7 +109,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * Build skills
          * @private
          */
-        async #buildskills() {
+        async #buildSkills() {
             // Exit if no items exist
             if (this.items.size === 0) return
 
@@ -121,7 +123,7 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
                     const category = itemData.system.category
                     const categoryMap = skillMap.get(category) ?? new Map()
                     categoryMap.set(itemId, itemData)
-                    skillMap.set(type, categoryMap)
+                    skillMap.set(category, categoryMap)
                 }
             }
 
@@ -157,45 +159,45 @@ Hooks.once('tokenActionHudCoreApiReady', async (coreModule) => {
          * Build stats
          * @private
          */
-        async #buildstats() {
+        async #buildStats() {
 
-            const stats = this.actor.system.stats
+            const actionTypeId = 'stat'
+            const stats = Object.entries(this.actor.system.stats)
+            const statMap = new Map()
 
-            // Exit if no stats exist
-            if (stats.length === 0) return
+            for (const [itemId, itemData] of stats) {
+                const category = STAT_TYPE[itemId]?.groupId
+                const categoryMap = statMap.get(category) ?? new Map()
+                categoryMap.set(itemId, itemData)
+                statMap.set(category, categoryMap)
+            }
 
-            // Get actions
-            const actions = Object.entries(stats)
-                .filter((stat) => stats[stat[0]].value !== 0)
-                .map(([statId, stat]) => {
-                    const id = `${actionType}-${statId}`
-                    const abbreviatedName = abilityId.charAt(0).toUpperCase() + abilityId.slice(1)
-                    const label = this.systemVersion >= '2.2' ? CONFIG.DND5E.stats[abilityId].label : CONFIG.DND5E.stats[abilityId]
-                    const name = this.abbreviateSkills ? abbreviatedName : label
-                    // Localise
-                    const actionTypeName = `${coreModule.api.Utils.i18n(ACTION_TYPE[actionType])}: ` ?? ''
-                    const listName = `${actionTypeName}${label}`
-                    const encodedValue = [actionType, abilityId].join(this.delimiter)
-                    const icon1 = (groupId !== 'checks') ? this.#getProficiencyIcon(stats[abilityId].proficient) : ''
-                    const mod = (groupId !== 'saves') ? ability?.mod : ((groupId === 'saves') ? ability?.save : '')
-                    const info1 = (this.actor) ? { text: coreModule.api.Utils.getModifier(mod) } : null
-                    const info2 = (this.actor && groupId === 'stats') ? { text: `(${coreModule.api.Utils.getModifier(ability?.save)})` } : null
+            for (const [category, categoryMap] of statMap) {
+                const groupId = category
+
+                if (!groupId) continue
+
+                const groupData = { id: groupId, type: 'system' }
+
+                // Get actions
+                const actions = [...categoryMap].map(([itemId, itemData]) => {
+                    const id = itemId
+                    const name = STAT_TYPE[itemId]?.name
+                    const actionTypeName = coreModule.api.Utils.i18n(ACTION_TYPE[actionTypeId])
+                    const listName = `${actionTypeName ? `${actionTypeName}: ` : ''}${name}`
+                    const encodedValue = [actionTypeId, id].join(this.delimiter)
+
                     return {
                         id,
                         name,
-                        encodedValue,
-                        icon1,
-                        info1,
-                        info2,
-                        listName
+                        listName,
+                        encodedValue
                     }
                 })
 
-            // Create group data
-            const groupData = { id: groupId, type: 'system' }
-
-            // Add actions to action list
-            this.addActions(actions, groupData)
+                // TAH Core method to add actions to the action list
+                this.addActions(actions, groupData)
+            }
         }
     }
 })
